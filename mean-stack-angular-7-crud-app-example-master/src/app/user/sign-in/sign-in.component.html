@@ -1,0 +1,66 @@
+<html>
+
+<head>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <div class="col-sm-6 col-sm-offset-4" style="margin-top:50px">
+    <div class="panel panel-default" style="text-align:center;width: 450px ;">
+      <div class="panel-heading" style="background-image: url('../assets/img/gg.jpg')">
+        <div class="panel-title" style=" text-align: center">
+          <i class="fa fa-user-circle fa-5x" style="color: whitesmoke"></i>
+          <br>
+          <h2 style=" text-align: center;color:#F08080">Sign In</h2>
+        </div>
+      </div>
+      <div class="panel-body" style="text-align: center; height: 400px">
+
+
+        <form style="margin-top: 10px" #signInForm="ngForm" (ngSubmit)="signInForm.valid && onSubmit(signInForm)">
+
+          <label class="text-muted" style="font-size: 20;padding-bottom: 7px">Welcome User!</label>
+
+          <div>
+            <label class="text-muted float-left" for="username" style="font-size: 24;">Username :</label>
+            <input type="text" name="email" id="username" #email="ngModel" [(ngModel)]="model.email"
+              [pattern]="emailRegex" required [ngClass]="{'invalid-textbox' :signInForm.submitted && !email.valid }"
+              class="form-control float-right" placeholder="Email" style="width:63%">
+            <div *ngIf="signInForm.submitted && email.errors?.pattern" style="margin-left: 33%; color:hsl(0, 83%, 34%)">
+              <p style="margin-left: 50%;">Invalid email address.</p>
+            </div>
+            <br>
+            <br>
+            <label class="text-muted float-left" for="password" style="font-size: 24;">Password :</label>
+            <input type="password" name="password" id="password" #password="ngModel" [(ngModel)]="model.password"
+              placeholder="Password" required minlength="4"
+              [ngClass]="{'invalid-textbox' :signInForm.submitted && !password.valid }" class="form-control float-right"
+              style="width:63%">
+            <div *ngIf="signInForm.submitted && password.errors?.minlength"
+              style="margin-left: 63%; color:hsl(0, 83%, 34%)">
+              <p>Minimum 4 characters.</p>
+            </div>
+          </div>
+          <br><br><br>
+
+          <div>
+            <button type="submit" value="Sign In" class="btn btn-primary form-control" style="width: 30%"><b>Sign
+                In</b></button>
+          </div>
+          <hr>
+          <h5>Don’t have an account?<a routerLink="/signup"> Sign up</a></h5>
+        </form>
+        <!-- Error message -->
+        <div class="alert alert-danger" *ngIf="serverErrorMessages">
+          {{serverErrorMessages}}
+        </div>
+      </div>
+    </div>
+    <!-- </div> -->
+  </div>
+</body>
+
+</html>

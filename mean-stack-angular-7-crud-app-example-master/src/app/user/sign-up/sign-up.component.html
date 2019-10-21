@@ -1,0 +1,76 @@
+<html>
+
+<head>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <div class="col-sm-6 col-sm-offset-4" style="margin-top:50px;">
+    <div class="panel panel-default" style="text-align:center;width: 450px;">
+      <div class="panel-heading" style="background-image: url('../assets/img/gg.jpg')">
+        <div class="panel-title" style=" text-align: center">
+          <i class="fa fa-user-circle fa-5x" style="color: whitesmoke"></i>
+          <br>
+          <h2 style=" text-align: center;color:#F08080">Sign Up</h2>
+        </div>
+      </div>
+
+      <div class="panel-body" style="text-align: center; height: 435px;">
+        <form style="margin-top: 10px" #signUpForm="ngForm" (ngSubmit)="signUpForm.valid && onSubmit(signUpForm)">
+          <label class="text-muted" style="font-size: 20;padding-bottom: 7px">Welcome User!</label>
+          <div>
+            <label class="text-muted float-left" for="name" style="font-size: 24;height:20px">Full Name :</label>
+            <input type="text" id="name" #fullName="ngModel" [(ngModel)]="userService.selectedUser.fullName"
+              name="fullName" placeholder="Enter your name" required
+              [ngClass]="{'invalid-textbox' :signUpForm.submitted && !fullName.valid }" class="form-control float-right"
+              style="width:63%;">
+            <div *ngIf="signUpForm.submitted && !fullName.valid" style="margin-left: 63%; color:hsl(0, 83%, 34%);">
+              <p>This field is required.</p>
+            </div>
+            <br><br>
+            <label class="text-muted float-left" for="emailId" style="font-size: 24;">Email :</label>
+            <input type="text" id="emailId" #email="ngModel" [(ngModel)]="userService.selectedUser.email" name="email"
+              placeholder="Enter your email" required [pattern]="emailRegex"
+              [ngClass]="{'invalid-textbox' :signUpForm.submitted && !email.valid }" class="form-control float-right"
+              style="width:63%">
+
+            <div *ngIf="signUpForm.submitted && email.errors" style="margin-left: 63%; color:hsl(0, 83%, 34%);">
+              <p *ngIf="email.errors.required">This field is required.</p>
+              <p *ngIf="email.errors.pattern">Invalid email address.</p>
+            </div>
+            <br><br>
+
+            <label class="text-muted float-left" for="pword" style="font-size: 24;">Password :</label>
+            <input type="password" id="pword" #password="ngModel" [(ngModel)]="userService.selectedUser.password"
+              name="password" placeholder="Enter your password" minlength="4" required
+              [ngClass]="{'invalid-textbox' :signUpForm.submitted && !password.valid }" class="form-control float-right"
+              style="width:63%">
+            <div *ngIf="signUpForm.submitted && password.errors" style="margin-left: 63%; color:hsl(0, 83%, 34%);">
+              <p *ngIf="password.errors.required">This field is required.</p>
+              <p *ngIf="password.errors.minlength">Enter atleast 4 characters.</p>
+            </div>
+          </div>
+
+          <br><br>
+          <button type="submit" value="Sign Up" class="btn btn-primary form-control" style="width: 30%"><b>Sign
+              Up</b></button>
+          <h5>Already have an account? <a routerLink="/login">Sign In</a></h5>
+        </form>
+        <!-- Success message -->
+        <div class="alert alert-success" *ngIf="showSucessMessage">
+          Saved successfully
+        </div>
+        <!-- Error message -->
+        <div class="alert alert-danger" *ngIf="serverErrorMessages">
+          {{serverErrorMessages}}
+        </div>
+
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

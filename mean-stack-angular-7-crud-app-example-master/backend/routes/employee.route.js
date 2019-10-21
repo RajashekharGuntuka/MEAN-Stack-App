@@ -4,6 +4,13 @@ const employeeRoute = express.Router();
 
 // Employee model
 let Employee = require('../models/Employee');
+var User = require('../models/user.model');
+const ctrlUser = require('../controllers/user.controller');
+const jwtHelper = require('../config/jwtHelper');
+
+employeeRoute.post('/register', ctrlUser.register);
+employeeRoute.post('/authenticate', ctrlUser.authenticate);
+employeeRoute.get('/employees-list',jwtHelper.verifyJwtToken, ctrlUser.userProfile);
 
 // Add Employee
 employeeRoute.route('/create').post((req, res, next) => {
@@ -46,7 +53,7 @@ employeeRoute.route('/update/:id').put((req, res, next) => {
   }, (error, data) => {
     if (error) {
       return next(error);
-      console.log(error)
+
     } else {
       res.json(data)
       console.log('Data updated successfully')

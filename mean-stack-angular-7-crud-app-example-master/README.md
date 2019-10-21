@@ -1,73 +1,39 @@
-MEAN Stack App(MongoDB,Express,Angualr and Node)–Employee management system using Angular 7 MEAN stack (CRUD App with Bootstrap 4)
+# mean-stack-angular-7-crud-app-example
+A step by step  MEAN Stack Tutorial from which you will learn to build Angular 7 CRUD App with Bootstrap 4, MongoDB, NodeJS and Express JS from scratch.
 
-##Node.js, Express.js, MongoDB for backend and Angular 7 for handling frontend.
-##employee management system using Angular 7 MEAN stack.
+This project was built with Angular CLI version 7.2.3.
 
-Let us understand what does MEAN stack means.
+Step by step article on [MEAN Stack Tutorial – Angular 7 CRUD App with Bootstrap 4
+](https://www.positronx.io/mean-stack-tutorial-angular-7-crud-bootstrap/)
 
-#Mongo DB – It’s an open-source NoSQL cross-platform document-oriented database.
-#Express JS – It’s a web-based application framework work with Node JS, It helps to build web apps and RESTful APIs.
-#Angular 7 – Its a TypeScript based complete front-end framework developed by Google team.
-#Node JS – It is a free JavaScript run time environment, It executes JavaScript code outside of a browser. It is available for MacOS, Windows, Linux and Unix.
+## How to run the app?
+- Run `npm install` to install required dependencies.
+- Run `ng serve` to run the angular app
+- Start the MEAN Stack backend
+  - `cd backend` to enter into the backend folder
+  - `nodemon server` to start the nodemon server
+  - `mongod` to start the mongoDB shell
 
-Use following plug-ins and tools to create MEAN Stack app.
+## Development server
 
-Node JS -Install from https://nodejs.org/en/download/
-MongoDB -Install from https://www.mongodb.com/download-center/community
-Visual Studio Code - Install from https://visualstudio.microsoft.com/downloads/
-Mongoose JS
-Express JS
-Angular CLI 7.2.3
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-##Schema Definition 
+## Code scaffolding
 
-let Employee = new Schema({
-   name: {
-      type: String
-   },
-   email: {
-      type: String
-   },
-   designation: {
-      type: String
-   },
-   phoneNumber: {
-      type: Number
-   }
-}, {
-   collection: 'employees'
-})
-module.exports = mongoose.model('Employee', Employee)
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-##DB Connection 
-module.exports = {
-   db: 'mongodb://localhost:27017/meandatabase'
-};
+## Build
 
-##In first terminal
-(In mean-stack-angular-7-crud-app-example-master folder )
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-1)npm install
-2) ng serve 
-It should without any errors
+## Running unit tests
 
-##In Second terminal
-For backend connection
-(In mean-stack-angular-7-crud-app-example-master\backend folder)
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-1)npm install 
-2)node server.js
+## Running end-to-end tests
 
-##In cmd
- 
-start MongoDB server
-1) run command 'mongod'
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-Open http://localhost:4200/ in browser
+## Further help
 
-Mongo shell commands
-
-1)show dbs  // list databases
-2)use meandatabase // switch to database
-3)coll=db.employees;// switch to collection (here employees)
-4)col.find()//list the objects in collection
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).

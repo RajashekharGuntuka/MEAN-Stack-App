@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from './../../service/api.service';
+import { UserService } from '../../shared/user.service';
+import { Router } from "@angular/router";
+
 
 @Component({
   selector: 'app-employee-list',
@@ -8,14 +11,25 @@ import { ApiService } from './../../service/api.service';
 })
 
 export class EmployeeListComponent implements OnInit {
-  
+
+  userDetails;
   Employee:any = [];
 
-  constructor(private apiService: ApiService) { 
+  constructor(private apiService: ApiService,private userService: UserService, private router: Router) { 
     this.readEmployee();
   }
 
-  ngOnInit() {}
+  ngOnInit() { 
+    this.userService.getUserProfile().subscribe(
+    res => {
+      this.userDetails = res['user'];
+    },
+    err => { 
+      console.log(err);
+      
+    }
+  );
+}
 
   readEmployee(){
     this.apiService.getEmployees().subscribe((data) => {
@@ -31,5 +45,11 @@ export class EmployeeListComponent implements OnInit {
       )    
     }
   }
+
+  onLogout(){
+    this.userService.deleteToken();
+    this.router.navigate(['/login']);
+  }
+
 
 }
